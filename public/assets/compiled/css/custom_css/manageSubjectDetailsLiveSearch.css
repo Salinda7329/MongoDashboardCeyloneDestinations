@@ -1,0 +1,45 @@
+
+/* Input field styling */
+.subject-input {
+    background-color: #1E1E2D;
+    color: #AAAABF;
+    border: 1px solid #333; /* Optional: To match the dark theme */
+    border-radius: 4px;
+    padding: 8px;
+}
+
+.subject-input::placeholder {
+    color: #66667F; /* Placeholder color to differentiate */
+}
+
+/* Suggestion box styling */
+.suggestion-box {
+    position: absolute;
+    background: #2B2B3B; /* Slightly lighter than input background for contrast */
+    border: 1px solid #333;
+    z-index: 1000;
+    width: 100%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    max-height: 200px;
+    overflow-y: auto;
+    margin-top: 2px;
+    border-radius: 4px;
+    display: none;
+}
+
+/* Style each suggestion item */
+.suggestion-item {
+    padding: 8px 12px;
+    cursor: pointer;
+    color: #AAAABF;
+    border-bottom: 1px solid #444;
+}
+
+.suggestion-item:last-child {
+    border-bottom: none;
+}
+
+/* Highlight the suggestion item on hover */
+.suggestion-item:hover {
+    background-color: #44445B;
+}

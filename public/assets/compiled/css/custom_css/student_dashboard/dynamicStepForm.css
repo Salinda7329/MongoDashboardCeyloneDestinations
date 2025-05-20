@@ -1,0 +1,146 @@
+/* Container for the form */
+#multi-step-form {
+    width: 100%;
+    margin: auto;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    font-family: Arial, sans-serif;
+    font-size: 18px;
+    box-sizing: border-box;
+}
+
+.progress-bar-container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 40px;
+    position: relative; /* Ensure relative positioning */
+}
+
+/* Individual step circles */
+.step-circle {
+    width: 40px; /* Increase size */
+    height: 40px;
+    border: 3px solid #435EBE;
+    border-radius: 50%;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #435EBE;
+    font-weight: bold;
+    font-size: 18px; /* Increase font size */
+    z-index: 2; /* Ensure above lines */
+}
+
+/* Active step circle */
+.step-circle-active {
+    background: #435EBE;
+    color: #fff;
+}
+
+/* Done step circle */
+.step-circle-done {
+    background: #3498db; /* Blue color for completed steps */
+    color: #fff;
+}
+
+/* Lines between steps */
+.step-line {
+    height: 4px; /* Increase height */
+    background: #ccc; /* Default color */
+    flex: 1; /* Take up remaining space */
+    position: relative;
+    top: 20px; /* Adjust position */
+    z-index: 1; /* Ensure below circles */
+}
+
+/* Active step line */
+.step-line-active {
+    background: #435EBE; /* Active color */
+}
+
+/* Done step line */
+.step-line-done {
+    background: #3498db; /* Blue color for completed steps */
+}
+
+/* Form step sections */
+.form-step {
+    display: none;
+}
+
+.form-step-active {
+    display: block;
+    animation: fadeIn 0.5s ease;
+}
+
+/* Button styles */
+.btn {
+    padding: 12px 18px; /* Increase padding */
+    border: none;
+    border-radius: 6px; /* More rounded corners */
+    background: #3498db;
+    color: #fff;
+    font-size: 18px; /* Larger font size */
+    cursor: pointer;
+    transition: background 0.3s ease;
+    margin: 5px 0; /* Space between buttons */
+}
+
+.btn:hover {
+    background: #2980b9;
+}
+
+.btn-secondary {
+    background: #95a5a6;
+}
+
+.btn-secondary:hover {
+    background: #7f8c8d;
+}
+
+/* Input and select styles */
+.form-control {
+    width: 100%;
+    padding: 14px; /* Increase padding */
+    margin: 15px 0; /* Increase margin */
+    border: 1px solid #ccc;
+    border-radius: 6px; /* More rounded corners */
+    font-size: 18px; /* Larger font size */
+}
+
+/* Animation for form step transitions */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 768px) {
+    .step-circle {
+        width: 30px;
+        height: 30px;
+        font-size: 16px;
+    }
+
+    .step-line {
+        height: 3px;
+        top: 18px;
+    }
+
+    .btn {
+        font-size: 16px;
+    }
+
+    .form-control {
+        font-size: 16px;
+        padding: 12px;
+    }
+}
