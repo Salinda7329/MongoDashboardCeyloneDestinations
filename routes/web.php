@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\CustomVerificationController;
+use App\Models\Destination;
 
 Route::get('/', function () {
     return view('welcome');
