@@ -16,7 +16,8 @@ return [
     |
     */
 
-    'default' => env('DB_CONNECTION', 'sqlite'),
+    'default' => env('DB_CONNECTION', 'mongodb'),
+    // 'default_mongo' => env('DB_CONNECTION_MONGO', 'mongodb'),
 
     /*
     |--------------------------------------------------------------------------
