@@ -33,6 +33,11 @@ Route::middleware([
     Route::get('/admin/dashboard', function () {
         return view('admin.admin_dashboard');
     })->name('admin.dashboard');
+    //manage destinations
+    Route::get('/admin/manage_destinations', function () {
+        $destinations = Destination::all();
+        return view('admin.admin_manage_destinations', compact('destinations'));
+    })->name('admin.manage_destinations');
 });
 
 //-----------------END ADMIN ROUTES---------------

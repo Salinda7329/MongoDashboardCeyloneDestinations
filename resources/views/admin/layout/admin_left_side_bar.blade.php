@@ -13,16 +13,16 @@
 
         {{-- Signups --}}
         <li
-            class="sidebar-item has-sub {{ request()->is('daeeAdmin/new-signup-table') || request()->is('daeeAdmin/direct-signup-table') || request()->is('view-new-signup-daee') || request()->is('daeeAdmin/approved-signup-table') || request()->is('daeeAdmin/signup-status-table') || request()->is('daeeAdmin/approved-signups-report') || request()->is('view-approved-signup-daee') ? 'active' : '' }}">
+            class="sidebar-item has-sub {{ request()->is('admin/manage_destinations') || request()->is('view-approved-signup-daee') ? 'active' : '' }}">
             <a href="#" class='sidebar-link'>
                 <i class="bi bi-collection-fill"></i>
-                <span>Functions</span>
+                <span>Desitnations</span>
             </a>
 
             <ul class="submenu ">
                 <li
-                    class="submenu-item {{ request()->is('daeeAdmin/new-signup-table') || request()->is('view-new-signup-daee') ? 'active' : '' }}">
-                    <a href="/daeeAdmin/new-signup-table" class="submenu-link">Option1</a>
+                    class="submenu-item {{ request()->is('admin/manage_destinations') || request()->is('view-new-signup-daee') ? 'active' : '' }}">
+                    <a href="/admin/manage_destinations" class="submenu-link">Manage Destinations</a>
                 </li>
 
                 <li
