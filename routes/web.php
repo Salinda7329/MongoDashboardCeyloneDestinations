@@ -1,8 +1,9 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Auth\CustomVerificationController;
 use App\Models\Destination;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\DestinationController;
+use App\Http\Controllers\Auth\CustomVerificationController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -38,6 +39,8 @@ Route::middleware([
         $destinations = Destination::all();
         return view('admin.admin_manage_destinations', compact('destinations'));
     })->name('admin.manage_destinations');
+    //create a destination
+    Route::post('/create_destination', [DestinationController::class, 'store']);
 });
 
 //-----------------END ADMIN ROUTES---------------
