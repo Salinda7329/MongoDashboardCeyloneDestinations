@@ -15,9 +15,9 @@
                             <div class="col-md">
                                 <h3 class="card-title">Manage Destinations</h3>
                             </div>
-                            <button type="button" class="btn btn-outline-primary block" data-bs-toggle="modal"
-                                data-bs-target="#addSubject">
-                                Add a Subject
+                            <button type="button" id="6+" class="btn btn-outline-primary block btnAddDestination"
+                                data-bs-toggle="modal" data-bs-target="#manageDestinationModal">
+                                Add a Destination
                             </button>
                         </div>
 
@@ -27,8 +27,7 @@
                             <div class="table-responsive">
                                 @if ($destinations->isEmpty())
                                     <div class="alert alert-danger" role="alert" style="text-align: center;">
-                                        <h4 class="alert-heading">No New Signups Found</h4>
-                                        <p>There are no new signups at the moment. Please check back later.</p>
+                                        <h4 class="alert-heading">No Destinations Found</h4>
                                         <hr>
                                         <p class="mb-0">If you believe this is an error, please contact Development Team.
                                         </p>
@@ -42,6 +41,7 @@
                                                 <th>Title</th>
                                                 <th>Description</th>
                                                 <th>Image</th>
+                                                <th>Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -51,8 +51,33 @@
                                                     <td>{{ (string) $destination['_id'] }}</td>
                                                     <td>{{ $destination['destinationTitle'] }}</td>
                                                     <td>{{ $destination['description'] }}</td>
-                                                    <td><img src="{{ $destination['imagePath'] }}" alt="Image"
-                                                            width="100"></td>
+                                                    <td>
+                                                        <a href="{{ asset($destination->imagePath) }}"
+                                                            data-lightbox="destination-gallery"
+                                                            data-title="{{ $destination['destinationTitle'] }}">
+                                                            <img src="{{ asset($destination->imagePath) }}" width="100px"
+                                                                height="100px" class="img-fluid img-thumbnail">
+                                                        </a>
+
+                                                    </td>
+
+                                                    <td>
+                                                        <div class="d-flex align-items-center">
+                                                            <a href="#"
+                                                                class="btn btn-primary btn-icon btnEditDestination me-2"
+                                                                data-bs-toggle="modal"
+                                                                data-bs-target="#manageDestinationModal"
+                                                                data-id="{{ (string) $destination['_id'] }}">
+                                                                <i class="bi bi-pencil"></i>
+                                                            </a>
+
+                                                            <a href="#"
+                                                                class="btn btn-danger btn-icon btnDeleteDestination me-2"
+                                                                data-id="{{ (string) $destination['_id'] }}">
+                                                                <i class="bi bi-x-square"></i>
+                                                            </a>
+                                                        </div>
+                                                    </td>
                                                 </tr>
                                             @endforeach
                                         </tbody>
@@ -67,20 +92,19 @@
         </div>
     </section>
 
-    {{-- add Destination Modal --}}
-    <div class="modal modal-lg fade text-left mt-3" id="addSubject" tabindex="-1" role="dialog"
+    {{-- Destination Modal --}}
+    <div class="modal modal-lg fade text-left mt-3" id="manageDestinationModal" tabindex="-1" role="dialog"
         aria-labelledby="addSubjectModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
             <div class="modal-content">
                 <div class="modal-header bg-success">
-                    <h5 class="modal-title white" id="addSubjectModalLabel">Add New t</h5>
+                    <h5 class="modal-title white" id="DestinationModalLabel"></h5>
                     <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                         <i data-feather="x"></i>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="/create_destination" class="form form-horizontal"
-                        id="destinationAddForm" method="POST" enctype="multipart/form-data">
+                    <form action="#" class="form form-horizontal" id="destinationAddForm" enctype="multipart/form-data">
                         @csrf
                         <div class="form-body">
                             <div class="row mb-3">
@@ -124,7 +148,129 @@
     </div>
     {{-- End of add Destination Modal --}}
 
+    <!-- Image Preview Modal -->
+    <div class="modal fade" id="imagePreviewModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document" style="max-width: 90vw;">
+            <div class="modal-content bg-transparent border-0">
+                <div class="modal-body d-flex justify-content-center align-items-center p-0"
+                    style="background: rgba(0,0,0,0.85);">
+                    <img src="" id="previewImage" class="img-fluid rounded"
+                        style="max-height: 90vh; max-width: 100%;">
+                </div>
+            </div>
+        </div>
+    </div>
+    {{-- End of Image preview modal --}}
+
 @endsection
 
 @section('after-body')
+    <script>
+        // Show image in modal preview when clicked
+        $(document).on('click', '.img-preview', function() {
+            const imageUrl = $(this).data('image');
+            $('#previewImage').attr('src', imageUrl);
+            $('#imagePreviewModal').modal('show');
+        });
+
+
+        let editMode = false;
+        let editId = null;
+
+        // When "Add a Destination" button is clicked
+        $(document).on('click', '.btnAddDestination', function() {
+            editMode = false;
+            editId = null;
+            $('#DestinationModalLabel').text('Add New Destination');
+            $('#destinationAddForm').trigger('reset');
+            $('#destinationAddForm').attr('action', '/create_destination');
+            $('#destinationAddForm input[name="_method"]').remove(); // Ensure no method override
+            $('#imagePath').prop('required', true); // Required on create
+        });
+
+        // When "Edit" button is clicked
+        $(document).on('click', '.btnEditDestination', function() {
+            editMode = true;
+            editId = $(this).data('id');
+            $('#DestinationModalLabel').text('Edit Destination');
+
+            $.ajax({
+                url: `/get_destination/${editId}`, // You implement this in controller
+                type: 'GET',
+                success: function(data) {
+                    $('#destinationTitle').val(data.destinationTitle);
+                    $('#description').val(data.description);
+                    $('#imagePath').prop('required', false);
+
+                    $('#destinationAddForm').attr('action', `/update_destination/${editId}`);
+                    if (!$('#destinationAddForm input[name="_method"]').length) {
+                        $('#destinationAddForm').append(
+                            '<input type="hidden" name="_method" value="PUT">');
+                    }
+                    $('#manageDestinationModal').modal('show');
+                },
+                error: function(xhr) {
+                    alert('Failed to fetch destination data.');
+                }
+            });
+        });
+
+        // Submit the form via AJAX
+        $('#destinationAddForm').on('submit', function(e) {
+            e.preventDefault();
+
+            const form = $(this)[0];
+            const formData = new FormData(form);
+            const actionUrl = $(this).attr('action');
+            const method = editMode ? 'POST' : 'POST'; // PUT is spoofed using _method
+
+            $.ajax({
+                url: actionUrl,
+                type: method,
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function(res) {
+                    $('#manageDestinationModal').modal('hide');
+                    alert(res.message || 'Destination saved successfully!');
+                    location.reload(); // Refresh to update table
+                },
+                error: function(xhr) {
+                    const response = xhr.responseJSON;
+                    if (response && response.message) {
+                        alert(response.message);
+                    } else {
+                        alert('An error occurred while submitting the form.');
+                    }
+                }
+            });
+        });
+
+        // When "Delete" button is clicked
+        $(document).on('click', '.btnDeleteDestination', function() {
+            const id = $(this).data('id');
+
+            if (confirm('Are you sure you want to delete this destination? This action cannot be undone.')) {
+                $.ajax({
+                    url: `/delete_destination/${id}`,
+                    type: 'DELETE',
+                    data: {
+                        _token: '{{ csrf_token() }}'
+                    },
+                    success: function(res) {
+                        alert(res.message || 'Destination deleted successfully.');
+                        location.reload();
+                    },
+                    error: function(xhr) {
+                        const response = xhr.responseJSON;
+                        if (response && response.message) {
+                            alert(response.message);
+                        } else {
+                            alert('An error occurred while deleting the destination.');
+                        }
+                    }
+                });
+            }
+        });
+    </script>
 @endsection

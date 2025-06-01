@@ -41,6 +41,12 @@ Route::middleware([
     })->name('admin.manage_destinations');
     //create a destination
     Route::post('/create_destination', [DestinationController::class, 'store']);
+    //get destination details by id
+    Route::get('/get_destination/{id}', [DestinationController::class, 'getDestination']);
+    //update destination details by id
+    Route::match(['POST', 'PUT'], '/update_destination/{id}', [DestinationController::class, 'update']);
+    //delete destination by id
+    Route::delete('/delete_destination/{id}', [DestinationController::class, 'destroy']);
 });
 
 //-----------------END ADMIN ROUTES---------------
