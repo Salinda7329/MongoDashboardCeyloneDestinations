@@ -11,7 +11,7 @@
             </a>
         </li>
 
-        {{-- Signups --}}
+        {{-- Destinations --}}
         <li
             class="sidebar-item has-sub {{ request()->is('admin/manage_destinations') || request()->is('view-approved-signup-daee') ? 'active' : '' }}">
             <a href="#" class='sidebar-link'>
@@ -21,13 +21,24 @@
 
             <ul class="submenu ">
                 <li
-                    class="submenu-item {{ request()->is('admin/manage_destinations') || request()->is('view-new-signup-daee') ? 'active' : '' }}">
+                    class="submenu-item {{ request()->is('admin/manage_destinations') || request()->is('view-new-') ? 'active' : '' }}">
                     <a href="/admin/manage_destinations" class="submenu-link">Manage Destinations</a>
                 </li>
+            </ul>
+        </li>
 
+        {{-- Galleries --}}
+        <li
+            class="sidebar-item has-sub {{ request()->is('admin/manage_galleries') || request()->is('admin.manage_galleries') ? 'active' : '' }}">
+            <a href="#" class='sidebar-link'>
+                <i class="bi bi-collection-fill"></i>
+                <span>Galleries</span>
+            </a>
+
+            <ul class="submenu ">
                 <li
-                    class="submenu-item {{ request()->is('daeeAdmin/direct-signup-table') || request()->is('direct-signup-table') ? 'active' : '' }}">
-                    <a href="/daeeAdmin/direct-signup-table" class="submenu-link">Option2</a>
+                    class="submenu-item {{ request()->is('admin/manage_galleries') || request()->is('view-new-') ? 'active' : '' }}">
+                    <a href="/admin/manage_galleries" class="submenu-link">Manage Galleries</a>
                 </li>
             </ul>
         </li>

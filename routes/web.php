@@ -1,7 +1,9 @@
 <?php
 
+use App\Models\Gallery;
 use App\Models\Destination;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\GalleriesController;
 use App\Http\Controllers\DestinationController;
 use App\Http\Controllers\Auth\CustomVerificationController;
 
@@ -47,6 +49,20 @@ Route::middleware([
     Route::match(['POST', 'PUT'], '/update_destination/{id}', [DestinationController::class, 'update']);
     //delete destination by id
     Route::delete('/delete_destination/{id}', [DestinationController::class, 'destroy']);
+
+    //manage galleries
+    Route::get('/admin/manage_galleries', function () {
+        $galleries = Gallery::all();
+        return view('admin.admin_manage_galleries', compact('galleries'));
+    })->name('admin.manage_galleries');
+    // Get gallery details by ID
+    Route::get('/galleries/{id}', [GalleriesController::class, 'getGallery']);
+    // Create a new gallery
+    Route::post('/galleries', [GalleriesController::class, 'store']);
+    // Update gallery details by ID (method spoofed with POST + _method=PUT)
+    Route::match(['POST', 'PUT'], '/galleries/{id}', [GalleriesController::class, 'update']);
+    // Delete gallery by ID
+    Route::delete('/galleries/{id}', [GalleriesController::class, 'destroy']);
 });
 
 //-----------------END ADMIN ROUTES---------------
