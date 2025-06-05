@@ -11,6 +11,22 @@
             </a>
         </li>
 
+        {{-- Users --}}
+        <li
+            class="sidebar-item has-sub {{ request()->is('admin/manage_users') || request()->is('view-approved-signup-daee') ? 'active' : '' }}">
+            <a href="#" class='sidebar-link'>
+                <i class="bi bi-collection-fill"></i>
+                <span>Users</span>
+            </a>
+
+            <ul class="submenu ">
+                <li
+                    class="submenu-item {{ request()->is('admin/manage_users') || request()->is('view-new-') ? 'active' : '' }}">
+                    <a href="/admin/manage_users" class="submenu-link">Manage Users</a>
+                </li>
+            </ul>
+        </li>
+
         {{-- Destinations --}}
         <li
             class="sidebar-item has-sub {{ request()->is('admin/manage_destinations') || request()->is('view-approved-signup-daee') ? 'active' : '' }}">

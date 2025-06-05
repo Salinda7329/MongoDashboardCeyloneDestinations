@@ -1,8 +1,10 @@
 <?php
 
+use App\Models\User;
 use App\Models\Gallery;
 use App\Models\Destination;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UsersController;
 use App\Http\Controllers\GalleriesController;
 use App\Http\Controllers\DestinationController;
 use App\Http\Controllers\Auth\CustomVerificationController;
@@ -36,6 +38,20 @@ Route::middleware([
     Route::get('/admin/dashboard', function () {
         return view('admin.admin_dashboard');
     })->name('admin.dashboard');
+    //manage users
+    Route::get('/admin/manage_users', function () {
+        $users = User::all();
+        return view('admin.admin_manage_users', compact('users'));
+    })->name('admin.manage_users');
+    // Create a new user
+    Route::post('/create_user', [UsersController::class, 'store']);
+    // Get user details by ID
+    Route::get('/get_user/{id}', [UsersController::class, 'getUser']);
+    // Update user by ID
+    Route::match(['POST', 'PUT'], '/users/{id}', [UsersController::class, 'update']);
+    // Delete user by ID
+    Route::delete('/users/{id}', [UsersController::class, 'destroy']);
+
     //manage destinations
     Route::get('/admin/manage_destinations', function () {
         $destinations = Destination::all();

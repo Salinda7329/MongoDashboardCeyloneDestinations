@@ -10,16 +10,12 @@
             <div class="col-12">
                 <div class="card">
 
-                    <div class="card-header">
-                        <div class="row">
-                            <div class="col-md">
-                                <h3 class="card-title">Manage Galleries</h3>
-                            </div>
-                            <button type="button" class="btn btn-outline-primary btnAddGallery" data-bs-toggle="modal"
-                                data-bs-target="#manageGalleryModal">
-                                Add a Gallery
-                            </button>
-                        </div>
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h3 class="card-title">Manage Galleries</h3>
+                        <button type="button" class="btn btn-outline-primary btnAddGallery" data-bs-toggle="modal"
+                            data-bs-target="#manageGalleryModal">
+                            Add a Gallery
+                        </button>
                     </div>
 
                     <div class="card-content">
@@ -31,7 +27,7 @@
                                         <p>If this is unexpected, contact the Dev Team.</p>
                                     </div>
                                 @else
-                                    <table class="table table-hover table-bordered" id="galleryTable">
+                                    <table class="table table-hover table-bordered" id="myTable">
                                         <thead>
                                             <tr>
                                                 <th>ID</th>

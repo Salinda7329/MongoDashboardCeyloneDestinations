@@ -10,18 +10,14 @@
             <div class="col-12">
                 <div class="card">
 
-                    <div class="card-header">
-                        <div class="row">
-                            <div class="col-md">
-                                <h3 class="card-title">Manage Destinations</h3>
-                            </div>
-                            <button type="button" id="6+" class="btn btn-outline-primary block btnAddDestination"
-                                data-bs-toggle="modal" data-bs-target="#manageDestinationModal">
-                                Add a Destination
-                            </button>
-                        </div>
-
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h3 class="card-title">Manage Destinations</h3>
+                        <button type="button" class="btn btn-outline-primary btnAddDestination" data-bs-toggle="modal"
+                            data-bs-target="#manageDestinationModal">
+                            Add a Destination
+                        </button>
                     </div>
+
                     <div class="card-content">
                         <div class="card-body">
                             <div class="table-responsive">
