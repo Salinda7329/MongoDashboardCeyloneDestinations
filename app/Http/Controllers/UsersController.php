@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Auth\Events\Registered;
 
 class UsersController extends Controller
 {
@@ -21,13 +22,16 @@ class UsersController extends Controller
         // Use email as default password
         $defaultPassword = $request->email;
 
-        User::create([
+        $user = User::create([
             'name'     => $request->name,
             'email'    => $request->email,
             'password' => Hash::make($defaultPassword),
             'role'     => (int) $request->role,
             'status'   => (int) $request->status,
         ]);
+
+        // This triggers the email verification link
+        event(new Registered($user));
 
         return response()->json(['message' => 'User created successfully with email as default password.']);
     }
