@@ -95,8 +95,8 @@
                         <div class="form-group mb-3">
                             <label>Role</label>
                             <select name="role" id="userRole" class="form-control">
-                                <option value="1">Admin</option>
-                                <option value="0">User</option>
+                                <option value="2">Sub Admin</option>
+                                <option value="3">User</option>
                             </select>
                         </div>
                         <div class="form-group mb-3">

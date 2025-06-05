@@ -15,7 +15,7 @@ class UsersController extends Controller
         $request->validate([
             'name'  => 'required|string|max:255',
             'email' => 'required|email|unique:users',
-            'role'  => 'required|in:0,1',
+            'role'  => 'required|in:2,3',
             'status' => 'required|in:0,1',
         ]);
 
@@ -79,7 +79,7 @@ class UsersController extends Controller
                 'name'     => 'required|string|max:255',
                 'email'    => "required|email|unique:users,email,$id,_id",
                 'password' => 'nullable|string|min:6',
-                'role'     => 'required|in:0,1',
+                'role'     => 'required|in:1,2,3',
                 'status'   => 'required|in:0,1',
             ]);
 
