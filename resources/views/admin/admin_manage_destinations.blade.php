@@ -33,7 +33,7 @@
                                         style="text-align: center;">
                                         <thead>
                                             <tr>
-                                                <th>ID</th>
+                                                <th>#</th>
                                                 <th>Title</th>
                                                 <th>Description</th>
                                                 <th>Image</th>
@@ -42,9 +42,9 @@
                                         </thead>
                                         <tbody>
                                             @foreach ($destinations as $destination)
-                                                <!-- <div>{{ $destination }}</div> -->
                                                 <tr>
-                                                    <td>{{ (string) $destination['_id'] }}</td>
+                                                    <td>{{ $loop->iteration }}</td>
+                                                    {{-- <td>{{ (string) $destination['_id'] }}</td> --}}
                                                     <td>{{ $destination['destinationTitle'] }}</td>
                                                     <td>{{ $destination['description'] }}</td>
                                                     <td>

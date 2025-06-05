@@ -30,7 +30,7 @@
                                     <table class="table table-hover table-bordered" id="myTable">
                                         <thead>
                                             <tr>
-                                                <th>ID</th>
+                                                <th>#</th>
                                                 <th>Name</th>
                                                 <th>Default Image</th>
                                                 <th>Hover Image</th>
@@ -40,7 +40,8 @@
                                         <tbody>
                                             @foreach ($galleries as $gallery)
                                                 <tr>
-                                                    <td>{{ (string) $gallery->_id }}</td>
+                                                    <td>{{ $loop->iteration }}</td>
+                                                    {{-- <td>{{ (string) $gallery->_id }}</td> --}}
                                                     <td>{{ $gallery->name }}</td>
                                                     <td>
                                                         <img src="{{ asset($gallery->defaultPath) }}" width="100px"

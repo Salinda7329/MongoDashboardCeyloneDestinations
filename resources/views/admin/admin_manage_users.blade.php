@@ -28,7 +28,7 @@
                                 <table class="table table-hover table-bordered" id="myTable">
                                     <thead>
                                         <tr>
-                                            <th>ID</th>
+                                            <th>#</th>
                                             <th>Name</th>
                                             <th>Email</th>
                                             <th>Role</th>
@@ -40,7 +40,8 @@
                                     <tbody>
                                         @foreach ($users as $user)
                                             <tr>
-                                                <td>{{ (string) $user->_id }}</td>
+                                                <td>{{ $loop->iteration }}</td>
+                                                {{-- <td>{{ (string) $user->_id }}</td> --}}
                                                 <td>{{ $user->name }}</td>
                                                 <td>{{ $user->email }}</td>
                                                 <td>{{ $user->role == 1 ? 'Admin' : 'User' }}</td>
