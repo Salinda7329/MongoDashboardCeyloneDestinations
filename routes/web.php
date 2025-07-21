@@ -39,7 +39,7 @@ Route::middleware([
     // Route::get('/admin/dashboard', function () {
     //     return view('admin.admin_dashboard');
     // })->name('admin.dashboard');
-    Route::get('/admin/dashboard', [AdminDashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
+    Route::get('/admin/dashboard', [AdminDashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('admin.dashboard');
 
     //manage users
     Route::get('/admin/manage_users', function () {
