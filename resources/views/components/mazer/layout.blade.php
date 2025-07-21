@@ -81,7 +81,7 @@
                 <div class="sidebar-header position-relative">
                     <div class="d-flex justify-content-between align-items-center">
                         <div class="logo">
-                            <a href="/"><img src="{{ asset('assets/compiled/png/destination-logo.png') }}"
+                            <a href="#"><img src="{{ asset('assets/compiled/png/destination-logo.png') }}"
                                     alt="Logo" srcset=""
                                     style="width: 120px; height: auto;border-radius:5%"></a>
 

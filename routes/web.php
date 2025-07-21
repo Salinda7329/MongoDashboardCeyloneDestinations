@@ -10,7 +10,8 @@ use App\Http\Controllers\DestinationController;
 use App\Http\Controllers\Auth\CustomVerificationController;
 
 Route::get('/', function () {
-    return view('welcome');
+    // return view('welcome');
+    return view('new-welcome');
 });
 
 Route::middleware([
