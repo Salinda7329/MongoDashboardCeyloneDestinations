@@ -6,6 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {{-- <title>Vertical Navbar - Mazer Admin Dashboard</title> --}}
     <title>@yield('page-title')| CeyloneDestinations</title>
+    <!-- Favicon for most browsers -->
+    <link rel="icon" href="{{ asset('assets/compiled/png/destination-logo.png') }}" type="image/png">
+
+    <!-- Fallback shortcut icon -->
+    <link rel="shortcut icon" href="{{ asset('assets/compiled/png/destination-logo.png') }}" type="image/png">
+
 
     {{-- importing select2 library css for live search  --}}
     <link href="{{ asset('assets/compiled/css/custom_css/select2.min.css') }}" rel="stylesheet" />
