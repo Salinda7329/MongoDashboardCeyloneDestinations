@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminDashboardController;
 use App\Models\User;
 use App\Models\Gallery;
 use App\Models\Destination;
@@ -10,7 +11,6 @@ use App\Http\Controllers\DestinationController;
 use App\Http\Controllers\Auth\CustomVerificationController;
 
 Route::get('/', function () {
-    // return view('welcome');
     return view('new-welcome');
 });
 
@@ -36,9 +36,11 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified',
 ])->group(function () {
-    Route::get('/admin/dashboard', function () {
-        return view('admin.admin_dashboard');
-    })->name('admin.dashboard');
+    // Route::get('/admin/dashboard', function () {
+    //     return view('admin.admin_dashboard');
+    // })->name('admin.dashboard');
+    Route::get('/admin/dashboard', [AdminDashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
+
     //manage users
     Route::get('/admin/manage_users', function () {
         $users = User::all();
